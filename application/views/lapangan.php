@@ -45,14 +45,14 @@
 											<tr><td colspan="8" align="center">Data Kosong</td></tr>
 										';
 								} else {
-									$btnActions = '';
-									if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
-										$btnActions .= '<td>
-															<a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_ubah_lapangan" id="btnUbah" data-id="' . $b->id . '">Ubah</a>
-															<a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal_hapus_lapangan" id="btnHapus" data-id="' . $b->id . '">hapus</a>
-														</td>';
-									}
 									foreach ($lapangan as $b) {
+										$btnActions = '';
+										if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+											$btnActions .= '<td>
+																<a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_ubah_lapangan" id="btnUbah" data-id="' . $b->id . '">Ubah</a>
+																<a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal_hapus_lapangan" id="btnHapus" data-id="' . $b->id . '">hapus</a>
+															</td>';
+										}
 										echo '
 										<tr>
 											<td>' . $no . '</td>
