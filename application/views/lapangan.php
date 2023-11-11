@@ -62,7 +62,7 @@
 											<td>' . $b->kategori_name . '</td>
 											<td>' . $b->duration . ' ' . $b->unit . '</td>
 											<td>Rp ' . $b->price . ',-</td>
-											
+											'. $btnActions .'
 										</tr>
 									';
 										$no++;
