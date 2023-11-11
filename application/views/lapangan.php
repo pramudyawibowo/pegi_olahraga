@@ -14,8 +14,12 @@
 				<!-- TABLE STRIPED -->
 				<div class="panel">
 					<div class="panel-body">
-						<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_tambah_lapangan">Tambah Lapangan</button>
-						<br>
+						<?php
+						if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+							echo '<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modal_tambah_lapangan">Tambah Lapangan</button>
+								  <br>';
+						}
+						?>
 						<table class="table table-striped">
 							<thead>
 								<tr>
@@ -26,7 +30,11 @@
 									<th>Kategori</th>
 									<th>Durasi</th>
 									<th>Harga</th>
-									<th>Aksi</th>
+									<?php
+									if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+										echo '<th>Aksi</th>';
+									}
+									?>
 								</tr>
 							</thead>
 							<tbody>
@@ -37,6 +45,13 @@
 											<tr><td colspan="8" align="center">Data Kosong</td></tr>
 										';
 								} else {
+									$btnActions = '';
+									if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+										$btnActions .= '<td>
+															<a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_ubah_lapangan" id="btnUbah" data-id="' . $b->id . '">Ubah</a>
+															<a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal_hapus_lapangan" id="btnHapus" data-id="' . $b->id . '">hapus</a>
+														</td>';
+									}
 									foreach ($lapangan as $b) {
 										echo '
 										<tr>
@@ -44,13 +59,10 @@
 											<td>' . $b->kode . '</td>
 											<td><img src="' . base_url() . 'assets/foto_cover/' . $b->photo . '" width="50px" /></td>
 											<td>' . $b->lapangan_name . '</td>
-											<td>' . $b->kategori_name. '</td>
+											<td>' . $b->kategori_name . '</td>
 											<td>' . $b->duration . ' ' . $b->unit . '</td>
 											<td>Rp ' . $b->price . ',-</td>
-											<td>
-												<a href="#" class="btn btn-info btn-sm" data-toggle="modal" data-target="#modal_ubah_lapangan" id="btnUbah" data-id="'. $b->id .'">Ubah</a>
-												<a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modal_hapus_lapangan" id="btnHapus" data-id="'. $b->id .'">hapus</a>
-											</td>
+											
 										</tr>
 									';
 										$no++;

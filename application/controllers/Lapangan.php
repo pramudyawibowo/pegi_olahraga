@@ -12,10 +12,6 @@ class Lapangan extends CI_Controller
 			redirect('auth/login');
 		}
 
-		if (!in_array($this->session->userdata('level'), ['admin', 'manager'])) {
-			$this->session->set_flashdata('notif', 'Anda tidak berhak mengakses halaman tersebut!');
-			redirect('home');
-		}
 		$this->load->model('lapangan_model');
 		$this->load->model('kategori_model');
 	}
@@ -31,6 +27,11 @@ class Lapangan extends CI_Controller
 
 	public function tambah()
 	{
+		if (!in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+			$this->session->set_flashdata('notif', 'Anda tidak berhak mengakses halaman tersebut!');
+			redirect('home');
+		}
+
 		$this->form_validation->set_rules('kategori_id', 'kategori', 'trim|required');
 		$this->form_validation->set_rules('kode', 'kode', 'trim|required');
 		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
@@ -64,6 +65,11 @@ class Lapangan extends CI_Controller
 
 	public function ubah()
 	{
+		if (!in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+			$this->session->set_flashdata('notif', 'Anda tidak berhak mengakses halaman tersebut!');
+			redirect('home');
+		}
+
 		$this->form_validation->set_rules('kategori_id', 'kategori', 'trim|required');
 		$this->form_validation->set_rules('kode', 'kode', 'trim|required');
 		$this->form_validation->set_rules('name', 'Nama', 'trim|required');
@@ -87,6 +93,11 @@ class Lapangan extends CI_Controller
 
 	public function hapus()
 	{
+		if (!in_array($this->session->userdata('level'), ['admin', 'manager'])) {
+			$this->session->set_flashdata('notif', 'Anda tidak berhak mengakses halaman tersebut!');
+			redirect('home');
+		}
+
 		if ($this->lapangan_model->hapus() == TRUE) {
 			$this->session->set_flashdata('notif', 'Hapus lapangan Berhasil');
 			redirect('lapangan/index');

@@ -9,15 +9,14 @@ class Transaksi_model extends CI_Model
 	{
 		$query = $this->db->select('t.id, t.duration, t.total, t.waktu, t.status, t.renter_name, u.name as user_name, l.kode, l.name as lapangan_name, l.unit as lapangan_unit', false)
 			->join('lapangan l', 'l.id = t.lapangan_id')
-			->join('user u', 'u.id = t.user_id')
-			->get('transaksi t');
-		
+			->join('user u', 'u.id = t.user_id');
+
 		if (in_array($this->session->userdata('level'), ['admin', 'manager'])) {
-			return $query->result();
+			
 		} else {
-			return $query->where('t.user_id', $this->session->userdata('user_id'))
-				->result();
+			$query->where('t.user_id', $this->session->userdata('user_id'));
 		}
+		return $query->get('transaksi t')->result();
 	}
 
 	public function get_data_transaksi_by_id($id)

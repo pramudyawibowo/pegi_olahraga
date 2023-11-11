@@ -28,7 +28,7 @@ class Level extends CI_Controller
 	}
 	public function tambah()
 	{
-		$this->form_validation->set_rules('nama_level', 'Nama Level', 'trim|required');
+		$this->form_validation->set_rules('name', 'Nama Level', 'trim|required');
 		if ($this->form_validation->run() == TRUE) {
 			if ($this->level_model->tambah() == TRUE) {
 				$this->session->set_flashdata('notif', 'Tambah level berhasil');
